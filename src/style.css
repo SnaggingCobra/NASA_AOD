@@ -4,5 +4,353 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 20px;
+  padding: 14px 18px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+header h1 {
+  margin: 0;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 30px;
+}
+main::before {
+  content: '✦  ·  ✧  ·  ✦';
+
+  display: block;
+
+  text-align: center;
+
+  margin-bottom: -35px;
+
+  font-size: 14px;
+
+  letter-spacing: 12px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  animation: stars 4s ease-in-out infinite;
+}
+
+@keyframes stars {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+#search {
+  width: 100%;
+  padding: 18px 24px;
+
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+
+  color: white;
+
+  background: rgba(10, 15, 35, 0.45);
+
+  border: 1px solid rgba(140, 210, 255, 0.35);
+  border-radius: 18px;
+
+  outline: none;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 0 25px rgba(80, 180, 255, 0.12),
+    inset 0 0 20px rgba(255, 255, 255, 0.03);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+#search::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+#search:focus {
+  background: rgba(10, 20, 50, 0.6);
+
+  border-color: rgba(120, 220, 255, 0.8);
+
+  box-shadow:
+    0 0 15px rgba(80, 200, 255, 0.25),
+    0 0 40px rgba(80, 150, 255, 0.15),
+    inset 0 0 20px rgba(255, 255, 255, 0.04);
+}
+#clock {
+  position: relative;
+
+  text-align: center;
+
+  font-size: clamp(80px, 14vw, 170px);
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: 10px;
+
+  margin: 50px 0 45px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #8be9ff,
+    #b58cff,
+    #ffffff
+  );
+
+  background-size: 250% auto;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  animation: spaceClock 6s linear infinite;
+
+  filter: drop-shadow(0 0 20px rgba(100, 200, 255, 0.35));
+}
+
+@keyframes spaceClock {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 250% center;
+  }
+}
+#clock::before {
+  content: '✦  MISSION TIME  ✦';
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -30px;
+
+  transform: translateX(-50%);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 5px;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  white-space: nowrap;
+}
+section{
+  margin-top: 40px;
+}
+header button {
+  padding: 10px 16px;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+
+  cursor: pointer;
+  font-size: 13px;
+
+  backdrop-filter: blur(10px);
+  transition: 0.2s ease;
+}
+
+header button:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+
+.nasa-image {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+
+#greeting {
+  margin: 0;
+
+  font-family: 'Trebuchet MS', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  color: white;
+
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#shortcuts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+  margin-top: 25px;
+}
+#shortcuts button {
+  position: relative;
+
+  width: 105px;
+  height: 48px;
+
+  border: 1px solid rgba(130, 210, 255, 0.35);
+  border-radius: 14px;
+
+  background: rgba(10, 20, 45, 0.45);
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow: 0 0 15px rgba(80, 180, 255, 0.08);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+}
+#shortcuts button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+#shortcuts button:hover img {
+  transform: rotate(360deg) scale(1.15);
+
+  filter:
+    drop-shadow(0 0 5px rgba(120, 220, 255, 0.8))
+    drop-shadow(0 0 12px rgba(120, 150, 255, 0.5));
+}
+#shortcuts button::before {
+  content: '';
+
+  position: absolute;
+
+  inset: -6px;
+
+  border-radius: 22px;
+
+  border: 1px solid transparent;
+
+  border-top-color: rgba(100, 220, 255, 0.7);
+  border-right-color: rgba(160, 100, 255, 0.4);
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+#shortcuts button:hover::before {
+  opacity: 1;
+
+  animation: arcSpin 1.8s linear infinite;
+}
+@keyframes arcSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+#shortcuts button:hover {
+  transform: translateY(-8px) scale(1.05);
+
+  background: rgba(20, 40, 80, 0.65);
+
+  border-color: rgba(130, 220, 255, 0.9);
+
+  box-shadow:
+    0 0 15px rgba(80, 200, 255, 0.35),
+    0 0 40px rgba(80, 150, 255, 0.25),
+    0 0 70px rgba(120, 80, 255, 0.12);
+}
+#shortcuts button::after {
+  content: '✦  ·  ✧';
+
+  position: absolute;
+
+  top: -18px;
+  right: -15px;
+
+  font-size: 12px;
+
+  color: rgba(180, 230, 255, 0.8);
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+#shortcuts button:hover::after {
+  opacity: 1;
+
+  animation: starOrbit 2s linear infinite;
+}
+@keyframes starOrbit {
+  from {
+    transform: rotate(0deg) translateX(8px);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(8px);
+  }
 }
