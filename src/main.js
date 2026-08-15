@@ -7,8 +7,20 @@ const app = document.querySelector('#app')
 app.innerHTML = `
   <header>
     <h1 id="greeting">Good morning</h1>
-    <button>🛠️</button>
+    <button id="settings-button">🛠️</button>
   </header>
+  <div id="settings-panel">
+  <h3>Settings</h3>
+
+  <label for="theme-select">Theme</label>
+
+  <select id="theme-select">
+    <option value="system">System</option>
+    <option value="dark">Dark</option>
+    <option value="light">Light</option>
+  </select>
+    <button id="quick-launch">🚀 Quick Launch</button>
+</div>
 
   <main>
     <h2 id="clock"></h2>
@@ -24,12 +36,64 @@ app.innerHTML = `
       <div id="shortcuts"></div>
     </section>
 
-    <section>
-      <h2>NASA Astronomy Picture of the Day</h2>
-      <div id="nasa">nasa</div>
+    <section id="nasa-section">
+    <h2></h2>
+    <div id="nasa"></div>
     </section>
   </main>
 `
+const settingsButton = document.querySelector('#settings-button')
+const settingsPanel = document.querySelector('#settings-panel')
+const themeSelect = document.querySelector('#theme-select')
+
+settingsButton.addEventListener('click', () => {
+  settingsPanel.classList.toggle('open')
+})
+
+function applyTheme(theme) {
+  document.body.classList.remove('light-theme', 'dark-theme')
+
+  if (theme === 'system') {
+    const systemDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches
+
+    document.body.classList.add(
+      systemDark ? 'dark-theme' : 'light-theme'
+    )
+  }
+
+  if (theme === 'light') {
+    document.body.classList.add('light-theme')
+  }
+
+  if (theme === 'dark') {
+    document.body.classList.add('dark-theme')
+  }
+}
+
+const savedTheme = localStorage.getItem('cobra-theme') || 'system'
+
+themeSelect.value = savedTheme
+applyTheme(savedTheme)
+
+themeSelect.addEventListener('change', () => {
+  const selectedTheme = themeSelect.value
+
+  localStorage.setItem('cobra-theme', selectedTheme)
+
+  applyTheme(selectedTheme)
+})
+
+const quickLaunch = document.querySelector('#quick-launch')
+
+quickLaunch.addEventListener('click', () => {
+  window.open('https://nasa.gov', '_blank')
+  window.open('https://hackclub.com', '_blank')
+  window.open('https://spotify.com', '_blank')
+  window.open('https://github.com', '_blank')
+  window.open('https://youtube.com', '_blank')
+})
 
 const clock = document.querySelector('#clock')
 const greeting = document.querySelector('#greeting')
@@ -148,23 +212,31 @@ shortcuts.append(hackclubButton)
 
 
 const nasa = document.querySelector('#nasa')
-  fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+
+fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
   .then(response => {
     return response.json()
   })
   .then(data => {
-  console.log(data)
+    console.log(data)
 
-  const title = document.createElement('h3')
-  title.textContent = data.title
-  nasa.append(title)
+    if (data.media_type === 'image') {
 
-  if (data.media_type === 'image') {
-    const image = document.createElement('img')
-        image.src = data.url
-        image.classList.add('nasa-image')
+      document.body.style.backgroundImage = `url("${data.url}")`
 
-    nasa.append(image)
-  } 
-})
+      const info = document.createElement('div')
+      info.classList.add('nasa-info')
+
+      const title = document.createElement('h3')
+      title.textContent = data.title
+
+      const description = document.createElement('p')
+      description.textContent = data.explanation
+
+      info.append(title)
+      info.append(description)
+
+      nasa.append(info)
+    }
+  })
 
