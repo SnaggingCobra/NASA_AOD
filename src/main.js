@@ -1,9 +1,4 @@
 import './style.css'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  base: '/NASA_AOD/',
-})
 
 const apiKey = import.meta.env.VITE_NASA_API_KEY
 
