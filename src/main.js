@@ -93,7 +93,7 @@ quickLaunch.addEventListener('click', () => {
   window.open('https://hackclub.com', '_blank')
   window.open('https://spotify.com', '_blank')
   window.open('https://github.com', '_blank')
-  window.open('https://youtube.com', '_blank')
+  window.open('https://www.youtube.com/watch?v=Aq5WXmQQooo', '_blank')
 })
 
 const clock = document.querySelector('#clock')
@@ -192,7 +192,7 @@ youtubeButton.innerHTML = `
 `
 
 youtubeButton.addEventListener('click', () => {
-  window.location.href = 'https://youtube.com'
+  window.location.href = 'https://www.youtube.com/watch?v=Aq5WXmQQooo'
 })
 
 shortcuts.append(youtubeButton)
