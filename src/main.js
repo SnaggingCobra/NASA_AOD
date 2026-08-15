@@ -24,6 +24,7 @@ app.innerHTML = `
 
   <main>
     <h2 id="clock"></h2>
+    <div id="date"></div>
 
     <input
       id="search"
@@ -96,6 +97,7 @@ quickLaunch.addEventListener('click', () => {
 })
 
 const clock = document.querySelector('#clock')
+const date = document.querySelector('#date')
 const greeting = document.querySelector('#greeting')
 
 const greetingMessages = {
@@ -134,6 +136,17 @@ function updateClock() {
   minutes = String(minutes).padStart(2, '0')
 
   clock.textContent = `${hours}:${minutes}`
+  const dayName = now.toLocaleDateString('en-US', {
+  weekday: 'long'
+})
+
+const dateText = now.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+})
+
+date.textContent = `${dayName} • ${dateText}`
 }
 
 updateClock()
@@ -226,7 +239,6 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
 
       const info = document.createElement('div')
       info.classList.add('nasa-info')
-
       const title = document.createElement('h3')
       title.textContent = data.title
 

@@ -149,7 +149,7 @@ main::before {
 
   letter-spacing: 10px;
 
-  margin: 50px 0 45px;
+  margin: 50px 0 10px;
 
   background: linear-gradient(
     90deg,
@@ -185,7 +185,7 @@ main::before {
   position: absolute;
 
   left: 50%;
-  bottom: -30px;
+  bottom: -45px;
 
   transform: translateX(-50%);
 
@@ -566,4 +566,22 @@ body.light-theme .nasa-info p {
     0 0 30px rgba(80, 150, 255, 0.15);
 
   transform: translateY(-2px);
+}
+#date {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  margin: 0 0 55px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 15px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-shadow:
+    0 0 10px rgba(120, 210, 255, 0.4);
 }
